@@ -61,11 +61,11 @@ public class registro_empleados extends MbJavaComputeNode {
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
 			   	 cStmt = conn.prepareCall("{call sp_registra_empleado(?, ?, ?, ?, ?, ?, ?)}");
-			   	 cStmt.setInt(1, Integer.parseInt(props.getProperty("idEmpleado")+1));  
-	             cStmt.setString(2,props.getProperty("nombreEmpleado"));    
-	             cStmt.setInt(3, Integer.parseInt(props.getProperty("edad")));  
-	             cStmt.setString(4, props.getProperty("sexo"));  
-	             cStmt.setInt(5, Integer.parseInt(props.getProperty("tipoEmpleado")));  
+			   	 cStmt.setInt(1, Integer.parseInt(props.getProperty("IdEmpleado")));  
+	             cStmt.setString(2,props.getProperty("NombreEmpleado"));    
+	             cStmt.setInt(3, Integer.parseInt(props.getProperty("Edad")));  
+	             cStmt.setString(4, props.getProperty("Sexo"));  
+	             cStmt.setInt(5, Integer.parseInt(props.getProperty("TipoEmpleado")));  
 	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
 	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String             
 	             
