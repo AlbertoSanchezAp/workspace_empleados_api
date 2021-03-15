@@ -37,8 +37,9 @@ public class error_respuesta extends MbJavaComputeNode {
 				props.setProperty( entrada.getName(), entrada.getValueAsString() );	
 				entrada = entrada.getNextSibling();
 			} 
-			    	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta","11111");
-			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","Ha ocurrido un error al realizar la operacion");
+			
+			outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta","11111");
+			outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","Ha ocurrido un error al realizar la operacion");
 	               
 			   
 			// End of user code

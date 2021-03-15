@@ -50,8 +50,7 @@ public class actualiza_empleado extends MbJavaComputeNode {
 			   {
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
-			                 
-	             cStmt = conn.prepareCall("{call sp_actualiza_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			     cStmt = conn.prepareCall("{call sp_actualiza_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 	        	 cStmt.setInt(1,Integer.parseInt(props.getProperty("IdEmpleado")));
 			   	 cStmt.setString(2,props.getProperty("NombreEmpleado")); 
 	             cStmt.setInt(3, Integer.parseInt(props.getProperty("RolEmpleado")));  
