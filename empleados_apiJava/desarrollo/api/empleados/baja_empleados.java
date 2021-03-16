@@ -16,7 +16,7 @@ import com.ibm.broker.plugin.MbOutputTerminal;
 import com.ibm.broker.plugin.MbUserException;
 
 
-public class registro_empleados extends MbJavaComputeNode {
+public class baja_empleados extends MbJavaComputeNode {
 	public String url = "jdbc:mysql://localhost:3306/desarrolloApp?allowPublicKeyRetrieval=true";
 
 	public void evaluate(MbMessageAssembly inAssembly) throws MbException {
@@ -29,9 +29,7 @@ public class registro_empleados extends MbJavaComputeNode {
 			
 			MbMessage outMessage = new MbMessage();
 			outAssembly = new MbMessageAssembly(inAssembly, outMessage);
-			// ----------------------------------------------------------
-			// Add user code below
-			// Crear estructura de mensaje JSON/Data 
+		
 			MbElement outRoot = outMessage.getRootElement();
 
 			MbElement outHTTPRequest = outRoot.createElementAsLastChild("HTTPRequestHeader");
@@ -45,60 +43,30 @@ public class registro_empleados extends MbJavaComputeNode {
 			MbElement entrada = inMessage.getRootElement().getLastChild().getFirstElementByPath("/JSON/Data").getFirstChild();
 						
 			while(entrada != null ) {			
-				if(!entrada.getName().equals("LstGenero") && !entrada.getName().equals("LstRoles") &&  !entrada.getName().equals("LstTipoEmpleado") ){
 					props.setProperty(entrada.getName(), entrada.getValueAsString());
 					entrada = entrada.getNextSibling();
 					
-				}else{
-					entrada = entrada.getNextSibling();
-				}
 			} 
 			
 			
-			CallableStatement cStmt=null,stmConsNum=null;
-			Connection conn = null;
-			int empleadoInicial=0;
-			
-			
+			CallableStatement stmBaja=null;
+			Connection conn = null;			
 			
 			try
 			   {
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
 			     //consultar el ultimo empleado registrado o inicial
-			     stmConsNum = conn.prepareCall("{call sp_consulta_num_emp(?, ?)}");
-			     stmConsNum.registerOutParameter("NumEmpleado", Types.CHAR);//Tipo String
-			     stmConsNum.registerOutParameter("codigoRespuesta", Types.VARCHAR);//Tipo String            
-			     stmConsNum.execute();
+			     stmBaja = conn.prepareCall("{call sp_baja_empleado(?, ?, ?)}");
+			     stmBaja.setInt(1,Integer.parseInt(props.getProperty("IdEmpleado")));
+			     stmBaja.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
+			     stmBaja.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
 			     
-			     empleadoInicial=stmConsNum.getInt(1);    
-	             if(empleadoInicial>0){
-	            	 empleadoInicial++;			     	 
-	             }else{
-	            	 empleadoInicial=10001;
-	             }
+			     stmBaja.execute();
 	             
-	             cStmt = conn.prepareCall("{call sp_registra_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-	        	 cStmt.setInt(1,empleadoInicial);    
-			   	 cStmt.setString(2,props.getProperty("NombreEmpleado"));    
-	             cStmt.setInt(3, Integer.parseInt(props.getProperty("Edad")));  
-	             cStmt.setString(4, props.getProperty("Sexo"));  
-	             cStmt.setInt(5, Integer.parseInt(props.getProperty("RolEmpleado")));  
-	             cStmt.setInt(6, Integer.parseInt(props.getProperty("TipoEmpleado")));  
-	             // datos para la tabla sueldos
-	             cStmt.setDouble(7, new Double(props.getProperty("SueldoBaseHora")));
-	             cStmt.setDouble(8, new Double(props.getProperty("PagoHoraEntrega")));
-	             cStmt.setDouble(9, new Double(props.getProperty("BonoHora")));
-	             cStmt.setDouble(10, new Double(props.getProperty("ValeDespensa")));
-	             cStmt.setDouble(11, new Double(props.getProperty("SueldoBase")));
-	             // descripcion parametros de salida
-	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
-	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
-	             cStmt.execute();
-	             
-	             if(!cStmt.equals(null)){
-	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",cStmt.getString(12));
-			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",cStmt.getString(13));
+	             if(!stmBaja.equals(null)){
+	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",stmBaja.getString(2));
+			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",stmBaja.getString(3));
 	             }else{
 			    	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta","11111");
 			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","ha ocurrido un error");
@@ -107,7 +75,7 @@ public class registro_empleados extends MbJavaComputeNode {
 			   }catch(Exception e){
 			    throw e;
 			   }finally{
-			     cStmt.close();
+				 stmBaja.close();
 			     conn.close();
 			   }
 			// End of user code

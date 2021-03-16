@@ -1,11 +1,11 @@
 package desarrollo.api.empleados;
 
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Types;
 import java.util.Properties;
-
 import com.ibm.broker.javacompute.MbJavaComputeNode;
 import com.ibm.broker.plugin.MbElement;
 import com.ibm.broker.plugin.MbException;
@@ -15,23 +15,18 @@ import com.ibm.broker.plugin.MbMessageAssembly;
 import com.ibm.broker.plugin.MbOutputTerminal;
 import com.ibm.broker.plugin.MbUserException;
 
-
-public class registro_empleados extends MbJavaComputeNode {
+public class consulta_empleado extends MbJavaComputeNode {
 	public String url = "jdbc:mysql://localhost:3306/desarrolloApp?allowPublicKeyRetrieval=true";
 
 	public void evaluate(MbMessageAssembly inAssembly) throws MbException {
 		MbOutputTerminal out = getOutputTerminal("out");
-		//MbOutputTerminal alt = getOutputTerminal("alternate");
 
 		MbMessage inMessage = inAssembly.getMessage();
 		MbMessageAssembly outAssembly = null;
 		try {
-			
+
 			MbMessage outMessage = new MbMessage();
 			outAssembly = new MbMessageAssembly(inAssembly, outMessage);
-			// ----------------------------------------------------------
-			// Add user code below
-			// Crear estructura de mensaje JSON/Data 
 			MbElement outRoot = outMessage.getRootElement();
 
 			MbElement outHTTPRequest = outRoot.createElementAsLastChild("HTTPRequestHeader");
@@ -40,65 +35,39 @@ public class registro_empleados extends MbJavaComputeNode {
 			MbElement outJsonRoot = outRoot.createElementAsLastChild(MbJSON.PARSER_NAME);
 			MbElement outJsonData = outJsonRoot.createElementAsLastChild(MbElement.TYPE_NAME, MbJSON.DATA_ELEMENT_NAME, null);
 
-			//Vaciar el JSON de entrada en un properties
 			Properties props = new Properties();
 			MbElement entrada = inMessage.getRootElement().getLastChild().getFirstElementByPath("/JSON/Data").getFirstChild();
-						
+			
+			
 			while(entrada != null ) {			
-				if(!entrada.getName().equals("LstGenero") && !entrada.getName().equals("LstRoles") &&  !entrada.getName().equals("LstTipoEmpleado") ){
-					props.setProperty(entrada.getName(), entrada.getValueAsString());
-					entrada = entrada.getNextSibling();
-					
-				}else{
-					entrada = entrada.getNextSibling();
-				}
+				props.setProperty( entrada.getName(), entrada.getValueAsString() );	
+				entrada = entrada.getNextSibling();
 			} 
 			
-			
-			CallableStatement cStmt=null,stmConsNum=null;
+			CallableStatement cStmt=null;
 			Connection conn = null;
-			int empleadoInicial=0;
-			
-			
 			
 			try
 			   {
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
-			     //consultar el ultimo empleado registrado o inicial
-			     stmConsNum = conn.prepareCall("{call sp_consulta_num_emp(?, ?)}");
-			     stmConsNum.registerOutParameter("NumEmpleado", Types.CHAR);//Tipo String
-			     stmConsNum.registerOutParameter("codigoRespuesta", Types.VARCHAR);//Tipo String            
-			     stmConsNum.execute();
-			     
-			     empleadoInicial=stmConsNum.getInt(1);    
-	             if(empleadoInicial>0){
-	            	 empleadoInicial++;			     	 
-	             }else{
-	            	 empleadoInicial=10001;
-	             }
-	             
-	             cStmt = conn.prepareCall("{call sp_registra_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-	        	 cStmt.setInt(1,empleadoInicial);    
-			   	 cStmt.setString(2,props.getProperty("NombreEmpleado"));    
-	             cStmt.setInt(3, Integer.parseInt(props.getProperty("Edad")));  
-	             cStmt.setString(4, props.getProperty("Sexo"));  
-	             cStmt.setInt(5, Integer.parseInt(props.getProperty("RolEmpleado")));  
-	             cStmt.setInt(6, Integer.parseInt(props.getProperty("TipoEmpleado")));  
+			     cStmt = conn.prepareCall("{call sp_actualiza_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+	        	 cStmt.setInt(1,Integer.parseInt(props.getProperty("IdEmpleado")));
+			   	 cStmt.setString(2,props.getProperty("NombreEmpleado")); 
+	             cStmt.setInt(3, Integer.parseInt(props.getProperty("RolEmpleado")));  
+	             cStmt.setInt(4, Integer.parseInt(props.getProperty("TipoEmpleado")));  
 	             // datos para la tabla sueldos
-	             cStmt.setDouble(7, new Double(props.getProperty("SueldoBaseHora")));
-	             cStmt.setDouble(8, new Double(props.getProperty("PagoHoraEntrega")));
-	             cStmt.setDouble(9, new Double(props.getProperty("BonoHora")));
-	             cStmt.setDouble(10, new Double(props.getProperty("ValeDespensa")));
-	             cStmt.setDouble(11, new Double(props.getProperty("SueldoBase")));
+	             cStmt.setDouble(5, new Double(props.getProperty("SueldoBaseHora")));
+	             cStmt.setDouble(6, new Double(props.getProperty("PagoHoraEntrega")));
+	             cStmt.setDouble(7, new Double(props.getProperty("SueldoBase")));
 	             // descripcion parametros de salida
 	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
 	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
 	             cStmt.execute();
 	             
 	             if(!cStmt.equals(null)){
-	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",cStmt.getString(12));
-			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",cStmt.getString(13));
+	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",cStmt.getString(8));
+			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",cStmt.getString(9));
 	             }else{
 			    	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta","11111");
 			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","ha ocurrido un error");

@@ -1,3 +1,5 @@
 /registro_empleados.class
 /actualiza_empleado.class
 /error_respuesta.class
+/consulta_empleado.class
+/baja_empleados.class
