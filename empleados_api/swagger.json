@@ -50,28 +50,6 @@
         } ]
       }
     },
-    "/alta_movimientos" : {
-      "post" : {
-        "operationId" : "AltaMovimientos",
-        "responses" : {
-          "200" : {
-            "description" : "The operation was successful."
-          }
-        },
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "description" : "Insert a alta_movimientos",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "schema" : {
-            "type" : "string"
-          },
-          "description" : "The request body for the operation",
-          "required" : true
-        } ]
-      }
-    },
     "/actualiza/empleado" : {
       "post" : {
         "operationId" : "ActualizaEmpleado",
@@ -127,6 +105,72 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "description" : "Insert a empleado",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    },
+    "/alta/movimientos" : {
+      "post" : {
+        "operationId" : "RegistraMovimientos",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a movimientos",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    },
+    "/elimina/movimiento" : {
+      "post" : {
+        "operationId" : "EliminaMovimiento",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a movimiento",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    },
+    "/consulta/movimientos" : {
+      "post" : {
+        "operationId" : "ConsultaMovimientos",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a movimientos",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",

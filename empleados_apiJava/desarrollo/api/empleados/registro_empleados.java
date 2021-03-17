@@ -87,7 +87,7 @@ public class registro_empleados extends MbJavaComputeNode {
 	             cStmt.setInt(6, Integer.parseInt(props.getProperty("TipoEmpleado")));  
 	             // datos para la tabla sueldos
 	             cStmt.setDouble(7, new Double(props.getProperty("SueldoBaseHora")));
-	             cStmt.setDouble(8, new Double(props.getProperty("PagoHoraEntrega")));
+	             cStmt.setDouble(8, new Double(props.getProperty("PagoXEntrega")));
 	             cStmt.setDouble(9, new Double(props.getProperty("BonoHora")));
 	             cStmt.setDouble(10, new Double(props.getProperty("ValeDespensa")));
 	             cStmt.setDouble(11, new Double(props.getProperty("SueldoBase")));

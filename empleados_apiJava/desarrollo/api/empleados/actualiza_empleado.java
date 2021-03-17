@@ -39,9 +39,14 @@ public class actualiza_empleado extends MbJavaComputeNode {
 			
 			
 			while(entrada != null ) {			
-				props.setProperty( entrada.getName(), entrada.getValueAsString() );	
-				entrada = entrada.getNextSibling();
-			} 
+				if(!entrada.getName().equals("LstGenero") && !entrada.getName().equals("LstRoles") &&  !entrada.getName().equals("LstTipoEmpleado") ){
+					props.setProperty(entrada.getName(), entrada.getValueAsString());
+					entrada = entrada.getNextSibling();
+					
+				}else{
+					entrada = entrada.getNextSibling();
+				}
+			}
 			
 			CallableStatement cStmt=null;
 			Connection conn = null;
@@ -50,23 +55,24 @@ public class actualiza_empleado extends MbJavaComputeNode {
 			   {
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
-			     cStmt = conn.prepareCall("{call sp_actualiza_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			     cStmt = conn.prepareCall("{call sp_actualiza_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 	        	 cStmt.setInt(1,Integer.parseInt(props.getProperty("IdEmpleado")));
-			   	 cStmt.setString(2,props.getProperty("NombreEmpleado")); 
-	             cStmt.setInt(3, Integer.parseInt(props.getProperty("RolEmpleado")));  
-	             cStmt.setInt(4, Integer.parseInt(props.getProperty("TipoEmpleado")));  
+			   	 cStmt.setInt(2, Integer.parseInt(props.getProperty("RolEmpleado")));  
+	             cStmt.setInt(3, Integer.parseInt(props.getProperty("TipoEmpleado")));  
 	             // datos para la tabla sueldos
-	             cStmt.setDouble(5, new Double(props.getProperty("SueldoBaseHora")));
-	             cStmt.setDouble(6, new Double(props.getProperty("PagoHoraEntrega")));
-	             cStmt.setDouble(7, new Double(props.getProperty("SueldoBase")));
-	             // descripcion parametros de salida
+	             cStmt.setDouble(4, new Double(props.getProperty("SueldoBaseHora")));
+	             cStmt.setDouble(5, new Double(props.getProperty("PagoXEntrega")));
+	             cStmt.setDouble(6, new Double(props.getProperty("BonoHora")));
+	             cStmt.setDouble(7, new Double(props.getProperty("ValeDespensa")));
+	             cStmt.setDouble(8, new Double(props.getProperty("SueldoBase")));
+	             // descripcion parametros de salida                        
 	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
 	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
 	             cStmt.execute();
 	             
 	             if(!cStmt.equals(null)){
-	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",cStmt.getString(8));
-			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",cStmt.getString(9));
+	            	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta",cStmt.getString(9));
+			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje",cStmt.getString(10));
 	             }else{
 			    	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"codigoRespuesta","11111");
 			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","ha ocurrido un error");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" 
-xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmRouteToLabel.msgnode="ComIbmRouteToLabel.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ActualizaEmpleado.subflow="ActualizaEmpleado.subflow" xmlns:AltaEmpleado.subflow="AltaEmpleado.subflow" xmlns:AltaMovimientos.subflow="AltaMovimientos.subflow" xmlns:BajaEmpleado.subflow="BajaEmpleado.subflow" xmlns:ConsultaEmpleado.subflow="ConsultaEmpleado.subflow" xmlns:postRest.subflow="postRest.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" 
+xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmRouteToLabel.msgnode="ComIbmRouteToLabel.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ActualizaEmpleado.subflow="ActualizaEmpleado.subflow" xmlns:AltaEmpleado.subflow="AltaEmpleado.subflow" xmlns:BajaEmpleado.subflow="BajaEmpleado.subflow" xmlns:ConsultaEmpleado.subflow="ConsultaEmpleado.subflow" xmlns:ConsultaMovimientos.subflow="ConsultaMovimientos.subflow" xmlns:EliminaMovimiento.subflow="EliminaMovimiento.subflow" xmlns:RegistraMovimientos.subflow="RegistraMovimientos.subflow" xmlns:postRest.subflow="postRest.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" 
 xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="gen/empleados_api.msgflow" 
 nsPrefix="gen_empleados_api.msgflow">
 <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
@@ -30,28 +30,40 @@ nsPrefix="gen_empleados_api.msgflow">
 <nodes xmi:type="AltaEmpleado.subflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="325,300">
 <translation xmi:type="utility:ConstantString" string="AltaEmpleado (Implementation)"/>
 </nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="125,375" labelName="AltaMovimientos">
-<translation xmi:type="utility:ConstantString" string="AltaMovimientos (Label)"/>
-</nodes>
-<nodes xmi:type="AltaMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="325,375">
-<translation xmi:type="utility:ConstantString" string="AltaMovimientos (Implementation)"/>
-</nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="125,450" labelName="BajaEmpleado">
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="125,375" labelName="BajaEmpleado">
 <translation xmi:type="utility:ConstantString" string="BajaEmpleado (Label)"/>
 </nodes>
-<nodes xmi:type="BajaEmpleado.subflow:FCMComposite_1" xmi:id="FCMComposite_1_11" location="325,450">
+<nodes xmi:type="BajaEmpleado.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="325,375">
 <translation xmi:type="utility:ConstantString" string="BajaEmpleado (Implementation)"/>
 </nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="125,525" labelName="ConsultaEmpleado">
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="125,450" labelName="ConsultaEmpleado">
 <translation xmi:type="utility:ConstantString" string="ConsultaEmpleado (Label)"/>
 </nodes>
-<nodes xmi:type="ConsultaEmpleado.subflow:FCMComposite_1" xmi:id="FCMComposite_1_13" location="325,525">
+<nodes xmi:type="ConsultaEmpleado.subflow:FCMComposite_1" xmi:id="FCMComposite_1_11" location="325,450">
 <translation xmi:type="utility:ConstantString" string="ConsultaEmpleado (Implementation)"/>
 </nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="125,600" labelName="postRest">
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="125,525" labelName="ConsultaMovimientos">
+<translation xmi:type="utility:ConstantString" string="ConsultaMovimientos (Label)"/>
+</nodes>
+<nodes xmi:type="ConsultaMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_13" location="325,525">
+<translation xmi:type="utility:ConstantString" string="ConsultaMovimientos (Implementation)"/>
+</nodes>
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="125,600" labelName="EliminaMovimiento">
+<translation xmi:type="utility:ConstantString" string="EliminaMovimiento (Label)"/>
+</nodes>
+<nodes xmi:type="EliminaMovimiento.subflow:FCMComposite_1" xmi:id="FCMComposite_1_15" location="325,600">
+<translation xmi:type="utility:ConstantString" string="EliminaMovimiento (Implementation)"/>
+</nodes>
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="125,675" labelName="RegistraMovimientos">
+<translation xmi:type="utility:ConstantString" string="RegistraMovimientos (Label)"/>
+</nodes>
+<nodes xmi:type="RegistraMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_17" location="325,675">
+<translation xmi:type="utility:ConstantString" string="RegistraMovimientos (Implementation)"/>
+</nodes>
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="125,750" labelName="postRest">
 <translation xmi:type="utility:ConstantString" string="postRest (Label)"/>
 </nodes>
-<nodes xmi:type="postRest.subflow:FCMComposite_1" xmi:id="FCMComposite_1_15" location="325,600">
+<nodes xmi:type="postRest.subflow:FCMComposite_1" xmi:id="FCMComposite_1_19" location="325,750">
 <translation xmi:type="utility:ConstantString" string="postRest (Implementation)"/>
 </nodes>
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
@@ -67,6 +79,10 @@ nsPrefix="gen_empleados_api.msgflow">
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.Output_1" targetTerminalName="InTerminal.in"/>
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input_1"/>
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.Output_1" targetTerminalName="InTerminal.in"/>
+<connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input_1"/>
+<connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.Output_1" targetTerminalName="InTerminal.in"/>
+<connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input_1"/>
+<connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.Output_1" targetTerminalName="InTerminal.in"/>
 </composition>
 <propertyOrganizer>
 </propertyOrganizer>

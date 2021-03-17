@@ -16,7 +16,7 @@ import com.ibm.broker.plugin.MbMessageAssembly;
 import com.ibm.broker.plugin.MbOutputTerminal;
 import com.ibm.broker.plugin.MbUserException;
 
-public class consulta_empleado extends MbJavaComputeNode {
+public class consulta_movimientos extends MbJavaComputeNode {
 	public String url = "jdbc:mysql://localhost:3306/desarrolloApp?allowPublicKeyRetrieval=true";
 
 	public void evaluate(MbMessageAssembly inAssembly) throws MbException {
@@ -44,6 +44,7 @@ public class consulta_empleado extends MbJavaComputeNode {
 				props.setProperty( entrada.getName(), entrada.getValueAsString() );	
 				entrada = entrada.getNextSibling();
 			} 
+			
 			MbElement ArrayEmpleado=null,ObjectoEmpleado=null;
 			
 			CallableStatement cStmt=null;
@@ -55,20 +56,30 @@ public class consulta_empleado extends MbJavaComputeNode {
 				
 			     Class.forName("com.mysql.jdbc.Driver");
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
-			     cStmt = conn.prepareCall("{call sp_consulta_empleado()}");
-	        	   	  
+			     cStmt = conn.prepareCall("{call sp_consulta_movimientos(?, ?, ?, ?, ?, ?, ?, ?)}");
+			     cStmt.setInt(1,Integer.parseInt(props.getProperty("Id_Empleado")));
+			     cStmt.registerOutParameter("Movimiento", Types.INTEGER);
+			     cStmt.registerOutParameter("Empleado", Types.INTEGER);
+			     cStmt.registerOutParameter("Nombre", Types.VARCHAR);
+			     cStmt.registerOutParameter("SubTotalEntrega", Types.DOUBLE);
+			     cStmt.registerOutParameter("SubTotalBono", Types.DOUBLE);
+			     cStmt.registerOutParameter("SubTotalSueldoDiario", Types.DOUBLE);
+			     cStmt.registerOutParameter("Fecha", Types.VARCHAR);
+			   		     
 	             cStmt.execute();
+	   
 	             rs=cStmt.getResultSet();
 	            
-	             ArrayEmpleado= outJsonData.createElementAsLastChild(MbJSON.ARRAY,"Empleados",null);
+	             ArrayEmpleado= outJsonData.createElementAsLastChild(MbJSON.ARRAY,"Movimientos",null);
 	             while(rs.next()){
 	            	 ObjectoEmpleado= ArrayEmpleado.createElementAsLastChild(MbJSON.OBJECT,"",null);
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Empleado",rs.getInt(1));
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Nombre",rs.getString(2));
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Edad",rs.getInt(3));
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Sexo",rs.getString(4));
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Rol",rs.getString(5));
-	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Tipo",rs.getString(6));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Movimiento",rs.getInt(1));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Empleado",rs.getInt(2));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Nombre",rs.getString(3));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Monto_Entrega",rs.getDouble(4));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Monto_Bono",rs.getDouble(5));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Ingreso_Diario",rs.getDouble(6));
+	            	 ObjectoEmpleado.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"Fecha",rs.getString(7));
 			     } 
 	             
 	             

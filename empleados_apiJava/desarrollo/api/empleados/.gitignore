@@ -3,3 +3,7 @@
 /error_respuesta.class
 /consulta_empleado.class
 /baja_empleados.class
+/alta_movimiento.class
+/elimina_movimientos.class
+/elimina_movimiento.class
+/consulta_movimientos.class

@@ -3,9 +3,11 @@
     <ns2:operations>
         <ns2:operation name="ActualizaEmpleado" implementation="ActualizaEmpleado.subflow"/>
         <ns2:operation name="AltaEmpleado" implementation="AltaEmpleado.subflow"/>
-        <ns2:operation name="AltaMovimientos" implementation="AltaMovimientos.subflow"/>
         <ns2:operation name="BajaEmpleado" implementation="BajaEmpleado.subflow"/>
         <ns2:operation name="ConsultaEmpleado" implementation="ConsultaEmpleado.subflow"/>
+        <ns2:operation name="ConsultaMovimientos" implementation="ConsultaMovimientos.subflow"/>
+        <ns2:operation name="EliminaMovimiento" implementation="EliminaMovimiento.subflow"/>
+        <ns2:operation name="RegistraMovimientos" implementation="RegistraMovimientos.subflow"/>
         <ns2:operation name="postRest" implementation="postRest.subflow"/>
     </ns2:operations>
     <ns2:errorHandlers/>
