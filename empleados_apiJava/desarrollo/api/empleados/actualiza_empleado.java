@@ -66,8 +66,8 @@ public class actualiza_empleado extends MbJavaComputeNode {
 	             cStmt.setDouble(7, new Double(props.getProperty("ValeDespensa")));
 	             cStmt.setDouble(8, new Double(props.getProperty("SueldoBase")));
 	             // descripcion parametros de salida                        
-	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
-	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
+	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);
+	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);            
 	             cStmt.execute();
 	             
 	             if(!cStmt.equals(null)){

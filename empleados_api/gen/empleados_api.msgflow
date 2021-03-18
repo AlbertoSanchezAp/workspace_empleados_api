@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" 
-xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmRouteToLabel.msgnode="ComIbmRouteToLabel.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ActualizaEmpleado.subflow="ActualizaEmpleado.subflow" xmlns:AltaEmpleado.subflow="AltaEmpleado.subflow" xmlns:BajaEmpleado.subflow="BajaEmpleado.subflow" xmlns:ConsultaEmpleado.subflow="ConsultaEmpleado.subflow" xmlns:ConsultaMovimientos.subflow="ConsultaMovimientos.subflow" xmlns:EliminaMovimiento.subflow="EliminaMovimiento.subflow" xmlns:RegistraMovimientos.subflow="RegistraMovimientos.subflow" xmlns:postRest.subflow="postRest.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" 
+xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmRouteToLabel.msgnode="ComIbmRouteToLabel.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ActualizaEmpleado.subflow="ActualizaEmpleado.subflow" xmlns:AltaEmpleado.subflow="AltaEmpleado.subflow" xmlns:BajaEmpleado.subflow="BajaEmpleado.subflow" xmlns:ConsultaEmpleado.subflow="ConsultaEmpleado.subflow" xmlns:ConsultaMovimientos.subflow="ConsultaMovimientos.subflow" xmlns:Consulta_nomina.subflow="Consulta_nomina.subflow" xmlns:EliminaMovimiento.subflow="EliminaMovimiento.subflow" xmlns:RegistraMovimientos.subflow="RegistraMovimientos.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" 
 xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="gen/empleados_api.msgflow" 
 nsPrefix="gen_empleados_api.msgflow">
 <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
@@ -48,23 +48,23 @@ nsPrefix="gen_empleados_api.msgflow">
 <nodes xmi:type="ConsultaMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_13" location="325,525">
 <translation xmi:type="utility:ConstantString" string="ConsultaMovimientos (Implementation)"/>
 </nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="125,600" labelName="EliminaMovimiento">
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="125,600" labelName="Consulta_nomina">
+<translation xmi:type="utility:ConstantString" string="Consulta_nomina (Label)"/>
+</nodes>
+<nodes xmi:type="Consulta_nomina.subflow:FCMComposite_1" xmi:id="FCMComposite_1_15" location="325,600">
+<translation xmi:type="utility:ConstantString" string="Consulta_nomina (Implementation)"/>
+</nodes>
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="125,675" labelName="EliminaMovimiento">
 <translation xmi:type="utility:ConstantString" string="EliminaMovimiento (Label)"/>
 </nodes>
-<nodes xmi:type="EliminaMovimiento.subflow:FCMComposite_1" xmi:id="FCMComposite_1_15" location="325,600">
+<nodes xmi:type="EliminaMovimiento.subflow:FCMComposite_1" xmi:id="FCMComposite_1_17" location="325,675">
 <translation xmi:type="utility:ConstantString" string="EliminaMovimiento (Implementation)"/>
 </nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="125,675" labelName="RegistraMovimientos">
+<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="125,750" labelName="RegistraMovimientos">
 <translation xmi:type="utility:ConstantString" string="RegistraMovimientos (Label)"/>
 </nodes>
-<nodes xmi:type="RegistraMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_17" location="325,675">
+<nodes xmi:type="RegistraMovimientos.subflow:FCMComposite_1" xmi:id="FCMComposite_1_19" location="325,750">
 <translation xmi:type="utility:ConstantString" string="RegistraMovimientos (Implementation)"/>
-</nodes>
-<nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="125,750" labelName="postRest">
-<translation xmi:type="utility:ConstantString" string="postRest (Label)"/>
-</nodes>
-<nodes xmi:type="postRest.subflow:FCMComposite_1" xmi:id="FCMComposite_1_19" location="325,750">
-<translation xmi:type="utility:ConstantString" string="postRest (Implementation)"/>
 </nodes>
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
 <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input_1"/>

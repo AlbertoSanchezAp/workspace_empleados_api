@@ -59,8 +59,8 @@ public class baja_empleados extends MbJavaComputeNode {
 			     //consultar el ultimo empleado registrado o inicial
 			     stmBaja = conn.prepareCall("{call sp_baja_empleado(?, ?, ?)}");
 			     stmBaja.setInt(1,Integer.parseInt(props.getProperty("IdEmpleado")));
-			     stmBaja.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
-			     stmBaja.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
+			     stmBaja.registerOutParameter("codigoRespuesta", Types.CHAR);
+			     stmBaja.registerOutParameter("mensaje", Types.VARCHAR);            
 			     
 			     stmBaja.execute();
 	             

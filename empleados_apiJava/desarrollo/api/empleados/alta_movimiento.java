@@ -69,8 +69,8 @@ public class alta_movimiento extends MbJavaComputeNode {
 	             cStmt.setInt(3, Integer.parseInt(props.getProperty("EntregasDiaria")));  
 	             cStmt.setString(4, props.getProperty("FechaCaptura"));  
 	             cStmt.setInt(5, Integer.parseInt(props.getProperty("Turno")));  
-	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
-	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
+	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);
+	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);
 	             cStmt.execute();
 	             
 	             if(!cStmt.equals(null)){

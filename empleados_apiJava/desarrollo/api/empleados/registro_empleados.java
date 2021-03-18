@@ -53,13 +53,11 @@ public class registro_empleados extends MbJavaComputeNode {
 					entrada = entrada.getNextSibling();
 				}
 			} 
-			
-			
+					
 			CallableStatement cStmt=null,stmConsNum=null;
 			Connection conn = null;
 			int empleadoInicial=0;
-			
-			
+					
 			
 			try
 			   {
@@ -92,8 +90,8 @@ public class registro_empleados extends MbJavaComputeNode {
 	             cStmt.setDouble(10, new Double(props.getProperty("ValeDespensa")));
 	             cStmt.setDouble(11, new Double(props.getProperty("SueldoBase")));
 	             // descripcion parametros de salida
-	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
-	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            
+	             cStmt.registerOutParameter("codigoRespuesta", Types.CHAR);
+	             cStmt.registerOutParameter("mensaje", Types.VARCHAR);            
 	             cStmt.execute();
 	             
 	             if(!cStmt.equals(null)){
@@ -104,6 +102,7 @@ public class registro_empleados extends MbJavaComputeNode {
 			     	 outJsonData.createElementAsLastChild(MbElement.TYPE_NAME_VALUE,"mensaje","ha ocurrido un error");
 	             }
 	               
+	             
 			   }catch(Exception e){
 			    throw e;
 			   }finally{

@@ -58,7 +58,7 @@ public class elimina_movimiento extends MbJavaComputeNode {
 			     conn = DriverManager.getConnection(url,"root","usrPassw0rd");
 			     //consultar el ultimo empleado registrado o inicial
 			     stmBaja = conn.prepareCall("{call sp_eliminar_movimiento(?, ?, ?, ?)}");
-			     stmBaja.setInt(1,Integer.parseInt(props.getProperty("Movimientos")));
+			     stmBaja.setInt(1,Integer.parseInt(props.getProperty("Movimiento")));
 			     stmBaja.setInt(2,Integer.parseInt(props.getProperty("Empleado")));
 			     stmBaja.registerOutParameter("codigoRespuesta", Types.CHAR);//Tipo String
 			     stmBaja.registerOutParameter("mensaje", Types.VARCHAR);//Tipo String            

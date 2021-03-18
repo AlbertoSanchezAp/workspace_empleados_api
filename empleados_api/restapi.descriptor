@@ -6,9 +6,9 @@
         <ns2:operation name="BajaEmpleado" implementation="BajaEmpleado.subflow"/>
         <ns2:operation name="ConsultaEmpleado" implementation="ConsultaEmpleado.subflow"/>
         <ns2:operation name="ConsultaMovimientos" implementation="ConsultaMovimientos.subflow"/>
+        <ns2:operation name="Consulta_nomina" implementation="Consulta_nomina.subflow"/>
         <ns2:operation name="EliminaMovimiento" implementation="EliminaMovimiento.subflow"/>
         <ns2:operation name="RegistraMovimientos" implementation="RegistraMovimientos.subflow"/>
-        <ns2:operation name="postRest" implementation="postRest.subflow"/>
     </ns2:operations>
     <ns2:errorHandlers/>
 </ns2:restapiDescriptor>

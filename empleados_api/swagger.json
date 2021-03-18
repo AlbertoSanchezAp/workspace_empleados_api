@@ -6,28 +6,6 @@
     "description" : "empleados_api"
   },
   "paths" : {
-    "/rest" : {
-      "post" : {
-        "operationId" : "postRest",
-        "responses" : {
-          "200" : {
-            "description" : "The operation was successful."
-          }
-        },
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "description" : "Insert a rest",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "schema" : {
-            "type" : "string"
-          },
-          "description" : "The request body for the operation",
-          "required" : true
-        } ]
-      }
-    },
     "/alta_empleado" : {
       "post" : {
         "operationId" : "AltaEmpleado",
@@ -171,6 +149,28 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "description" : "Insert a movimientos",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    },
+    "/consulta_nomina" : {
+      "post" : {
+        "operationId" : "Consulta_nomina",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a consulta_nomina",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
